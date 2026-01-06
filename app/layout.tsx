@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/ui/navbar"; // Path check karein: navbar.tsx components/ui mein hai
+
 import AuthProvider from "@/lib/context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <Navbar />
           {children}
         </AuthProvider>
       </body>
