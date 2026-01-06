@@ -4,11 +4,17 @@ import { connectDB } from "@/lib/db/db";
 import UserModel from "@/lib/model/User";
 import mongoose from "mongoose";
 
+// export async function DELETE(
+//   request: Request,
+//   { params }: { params: { messageid: string } }
+// ) {
+
 export async function DELETE(
   request: Request,
-  { params }: { params: { messageid: string } }
+  { params }: { params: Promise<{ messageid: string }> } // params ko Promise banayein
 ) {
-  const messageId = params.messageid;
+
+ const { messageid } = await params; 
   await connectDB();
 
   // 1. Session se user nikalna zaruri hai
@@ -28,7 +34,7 @@ export async function DELETE(
       { _id: user._id }, 
       { 
         $pull: { 
-          messages: { _id: new mongoose.Types.ObjectId(messageId)} // Dhyan dein: Yahan '_id' hi likhna hai, 'id' nahi
+          messages: { _id: new mongoose.Types.ObjectId(messageid)} // Dhyan dein: Yahan '_id' hi likhna hai, 'id' nahi
         } 
       }
     );
