@@ -1,59 +1,83 @@
-Secret Message - Anonymous Feedback Platform
-Ek full-stack anonymous messaging platform jahan users bina apni identity reveal kiye feedback ya messages bhej sakte hain. Isme AI ka use karke unique questions suggest karne ka feature bhi hai.
+Secret Message - AI-Powered Anonymous Feedback System
+Welcome to the Secret Message platform! Ye project users ko anonymous messages receive karne aur AI ki madad se naye questions suggest karne ki facility deta hai. Isme secure dashboard aur real-time message management features hain.
 
- Key Features
-Anonymous Messaging: Har user ka ek unique profile link hota hai jahan koi bhi bina login kiye message bhej sakta hai.
+🚀 Features
+AI-Powered Message Suggestions: Google Gemini API ka use karke users ke liye intelligent aur engaging sawal suggest karna.
 
-AI-Powered Suggestions: Google Gemini API ka use karke intelligent aur engaging questions suggest karne ka feature.
+Anonymous Messaging: Bina identity reveal kiye kisi bhi user ko unke unique link par message bhejne ki suvidha.
 
-User Dashboard: Ek secure area jahan users apne messages dekh sakte hain, delete kar sakte hain aur apna status manage kar sakte hain.
+Secure User Dashboard: NextAuth (JWT) se protected dashboard jahan users apne messages manage kar sakte hain.
 
-Message Control Toggle: Users control kar sakte hain ki wo messages receive karna chahte hain ya nahi.
+Message Control Toggle: Ek click mein messages receive karna ON ya OFF karne ka feature.
 
-Secure Auth: NextAuth (JWT) ka use karke secure login aur session management.
+Permanent Deletion: MongoDB $pull operator ka use karke secure tarike se messages ko database se delete karna.
 
 🛠️ Tech Stack
-Framework: Next.js 15 (App Router)
-
-Language: TypeScript
+Frontend & Backend: Next.js 15 (App Router)
 
 Database: MongoDB with Mongoose
 
-Authentication: NextAuth.js
+Authentication: NextAuth.js (JWT Strategy)
 
-AI Integration: Vercel AI SDK & Google Gemini AI
+AI Integration: Google Gemini API via Vercel AI SDK
 
-Styling: Tailwind CSS & Shadcn UI
+UI/UX: Tailwind CSS & Shadcn UI Components
 
-🚀 Getting Started
-1. Repository Clone Karein
+📋 Prerequisites
+Node.js (v18 or higher)
+
+MongoDB Atlas Account
+
+Google AI (Gemini) API Key
+
+⚙️ Installation
+Clone the Repository
+
 Bash
 
-git clone https://github.com/your-username/secret-message.git
+git clone <your-repository-url>
 cd secret-message
-2. Dependencies Install Karein
+Install Dependencies
+
 Bash
 
 npm install
-3. Environment Variables (.env)
-Ek .env file banayein aur niche di gayi details bharein:
+Environment Setup Root directory mein ek .env file banayein:
 
 Code snippet
 
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URI=your_mongodb_uri
 NEXTAUTH_SECRET=your_nextauth_secret
 GOOGLE_GENERATIVE_AI_API_KEY=your_gemini_api_key
-4. Development Server Start Karein
+NEXTAUTH_URL=http://localhost:3000
+🚀 Running the Application
 Bash
 
+# Start the development server
 npm run dev
-Ab aapka project http://localhost:3000 par chalne lagega!
+Application ab http://localhost:3000 par run karegi.
 
-📂 Project Structure
-/app/api: Saari backend API routes (delete-message, accept-message, etc.)
+📝 API Endpoints
+Authentication
+POST /api/auth/signin - User login
 
-/components: Reusable UI components jaise Navbar aur MessageCard.
+POST /api/sign-up - Register naya user
 
-/lib: Database connection aur Mongoose models.
+Dashboard Actions
+GET /api/get-messages - User ke saare messages fetch karna
 
-Bhai, aapka project ab ready hai! Kya aap chahte hain main isme deploy karne ka tarika (Vercel par) bhi add kar doon?
+POST /api/accept-messages - Message receiving status update karna
+
+DELETE /api/delete-message/[messageid] - Specific message delete karna
+
+Public Actions
+POST /api/send-message - Kisi user ko anonymous message bhejna
+
+POST /api/suggest-messages - Gemini AI se suggestions lena
+
+🔍 Troubleshooting
+Middleware Redirects: Agar login ke baad dashboard nahi khul raha, toh middleware.ts mein token checking verify karein.
+
+Module Not Found: Next.js case-sensitive hai, Navbar vs navbar import paths check karein.
+
+MongoDB Error: Check karein ki IP Address MongoDB Atlas mein whitelisted hai ya nahi.
